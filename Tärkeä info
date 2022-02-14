@@ -9,4 +9,6 @@
 > nosta estenumeroa yhdellä
 > jos estenumero > 1, lakkaa
 
-Renkaan kehä on noin 176mm eli jos SetSpeed on 360, se liikkuu noin 176mm sekunnissa eteenpäin (Ainakin luulisin)
+Renkaan kehä on noin 176mm eli jos setSpeed on 360, se liikkuu noin 176mm sekunnissa eteenpäin (Ainakin luulisin)
+setSpeed(float speed)
+Sets desired motor speed , in degrees per second; The maximum reliably sustainable velocity is 100 x battery voltage under moderate load, such as a direct drive robot on the level.
