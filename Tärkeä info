@@ -1,0 +1,12 @@
+> estenumero = 0
+> aja
+> jos ei oo mustaa nii käänny (???)
+> huomaa este
+> nosta estenumeroa yhdellä
+> pyöri ympäri (pre set pyörähdys? Huomaa X cm päästä este, mene vasemmalle, mene eteenpäin X+Y cm, mene oikealle, etsi musta viiva)
+> aja lisää
+> huomaa este
+> nosta estenumeroa yhdellä
+> jos estenumero > 1, lakkaa
+
+Renkaan kehä on noin 176mm eli jos SetSpeed on 360, se liikkuu noin 176mm sekunnissa eteenpäin (Ainakin luulisin)
