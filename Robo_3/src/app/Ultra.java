@@ -17,10 +17,10 @@ public class Ultra extends Thread {
 
 		final SampleProvider sp = us.getDistanceMode();
 		int distance = 100; //alkuun vaa arvo, ei v‰li‰
-		int close = 25; //kuinka monen sentin p‰‰ss‰ esin saa olla
+		int close = 25; //kuinka monen sentin p‰‰ss‰ esine saa olla
 
 		while (true) {
-			if (distance > close) { 
+			if (distance > close) { //jos edess‰ ei oo mit‰‰n
 				de.setCMD(1);
 				float[] sample = new float[sp.sampleSize()];
 				sp.fetchSample(sample, 0);
