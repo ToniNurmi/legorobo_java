@@ -24,13 +24,13 @@ public class Ultra extends Thread {
 	public void run() {
 		final SampleProvider sp = us.getDistanceMode();
 		int distance = 100; // alkuun vaa arvo, ei v‰li‰
-		int close = 30; // kuinka monen sentin p‰‰ss‰ esine saa olla
+		int detect = 15; // kuinka monen sentin p‰‰ss‰ esine saa olla
 		int kierros = 0;
 		data.setObstacle(false);
 
 		while (true) {
 			if (data.getCMD() == 1) {
-				if (distance > close) { // jos edess‰ ei oo mit‰‰n
+				if (distance > detect) { // jos edess‰ ei oo mit‰‰n
 					data.setObstacle(false);
 					float[] sample = new float[sp.sampleSize()];
 					sp.fetchSample(sample, 0);
@@ -46,21 +46,19 @@ public class Ultra extends Thread {
 					data.setCMD(0);
 					data.setObstacle(true);
 					if (kierros < 2) {
-						
+
 						System.out.println("ESTE!!!"); // testi print
-						//kierros += 1;
+						// kierros += 1;
 						data.setCMD(1);
-						
+						distance = 100;
+
 					} else {
 						// z
 						data.setCMD(0);
 						System.exit(0);
 					}
 				}
-
 			}
 		}
-
 	}
-
 }
