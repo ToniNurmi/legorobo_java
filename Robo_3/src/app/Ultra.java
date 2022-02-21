@@ -30,9 +30,9 @@ public class Ultra extends Thread {
 				sp.fetchSample(sample, 0);
 				int distance = (int) (sample[0] * 100);
 				if (distance > detect) { // jos edessä ei oo mitään
-					data.setObstacle(false);
-					System.out.println("Distance: " + distance + "cm"); // näyttää näytöllä etäisyyden sentteinä
-					Delay.msDelay(250);
+					
+					//System.out.println("Distance: " + distance + "cm"); // näyttää näytöllä etäisyyden sentteinä
+					Delay.msDelay(100);
 
 					if (Button.getButtons() != 0) { // jos painaa nappia
 						us.close();
@@ -41,12 +41,12 @@ public class Ultra extends Thread {
 				} else { // jos havaitaan jotain
 					us.disable();
 					System.out.println("Kierros:" + kierros);
-					data.setCMD(0);
 					if (kierros < 1) {
 						sample = new float[sp.sampleSize()];
 						sp.fetchSample(sample, 0);
-						distance = (int) (sample[0] * 100);
-						obstacle();
+						distance = (int) (sample[0] * 100); // etitään uus distance, ettei vanha jää kummittelemaan
+						data.setObstacle(true);
+						//data.setCMD(1);
 						Delay.msDelay(3000);
 						kierros++;
 					} else {
@@ -57,11 +57,4 @@ public class Ultra extends Thread {
 			}
 		}
 	}
-
-	public void obstacle() {
-		data.setObstacle(true);
-		data.setCMD(1);
-		Delay.msDelay(500);
-	}
-
 }

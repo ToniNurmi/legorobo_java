@@ -16,7 +16,7 @@ public class LineFollower extends Thread {
 
 		data = de;
 		cs = new EV3ColorSensor(SensorPort.S1);
-		move = new Move();
+		move = new Move(de);
 	}
 
 	@Override
@@ -30,13 +30,20 @@ public class LineFollower extends Thread {
 				float color = (sample[0]);
 
 				if (data.getObstacle() == true) {
+					sample = new float[sp.sampleSize()];
+					sp.fetchSample(sample, 0);
+					color = (sample[0]);
 					move.moveFwd(0, 0);
-					Delay.msDelay(500);
+					Delay.msDelay(1000);
+					System.out.println("Line follower obstacel: " + data.getObstacle());
 					move.avoidObstacle();
-					Delay.msDelay(500);
-					data.setObstacle(false);
+					if (color < 0.07) {
+						data.setObstacle(false);
+					} else {
+						System.out.println("valoisaa");
+					}
 				} else {
-					//System.out.println(color); // testi printtaus
+					System.out.println(color); // testi printtaus
 					if (color > 0.09) { // jos on liian valoisaa, k‰‰nyt‰‰n vasemmalle
 						move.moveFwd(350, 200);
 					} else if (color < 0.07) { // jos on liian pime‰‰, k‰‰nyt‰‰n oikealle
@@ -45,8 +52,6 @@ public class LineFollower extends Thread {
 						move.moveFwd(350, 350);
 					}
 				}
-
-				
 
 				if (Button.getButtons() != 0) { // jos painaa nappia
 					cs.close();

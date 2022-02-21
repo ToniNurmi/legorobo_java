@@ -6,6 +6,7 @@ import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.navigation.MovePilot;
+import lejos.utility.Delay;
 
 public class Move extends Thread {
 
@@ -14,13 +15,15 @@ public class Move extends Thread {
 	private static EV3LargeRegulatedMotor motor2;
 	private static MovePilot pilot;
 
-	public Move() {
+	public Move(DataExchange de) {
+
+		data = new DataExchange();
 
 		motor1 = new EV3LargeRegulatedMotor(MotorPort.A); // oikea rengas
 		motor2 = new EV3LargeRegulatedMotor(MotorPort.D); // vasen rengas
 
-		Wheel wheelRight = WheeledChassis.modelWheel(motor1, 56).offset(-50);
-		Wheel wheelLeft = WheeledChassis.modelWheel(motor2, 56).offset(50);
+		Wheel wheelRight = WheeledChassis.modelWheel(motor1, 56).offset(-63); // renkaan l‰pimitta ja et‰isyys keskelt‰
+		Wheel wheelLeft = WheeledChassis.modelWheel(motor2, 56).offset(63);
 		Chassis chassis = new WheeledChassis(new Wheel[] { wheelRight, wheelLeft }, WheeledChassis.TYPE_DIFFERENTIAL);
 		pilot = new MovePilot(chassis);
 	}
@@ -33,30 +36,15 @@ public class Move extends Thread {
 	}
 
 	public void avoidObstacle() {
-		pilot.rotate(-180);
-		pilot.arc(325, 145);
-		pilot.rotate(-180);
+		pilot.rotate(-175); // k‰‰nny oikealle (en tie mihin luku perustuu, ei ainakaan asteisiin)
+		pilot.setLinearSpeed(165);
+		pilot.arc(345, 360, true); // radius, angle (matka, kulma)
+		if (data.getObstacle() == false) {
+			pilot.stop();
+			Delay.msDelay(3000);
+			pilot.rotate(-175);
+		} else if (!pilot.isMoving()) {
+			data.setObstacle(false);
+		}
 	}
-
-//	public void right() {
-//	motor1.setSpeed(200); // PIENEMPI
-//	motor1.forward();
-//	motor2.setSpeed(350); // ISOMPI
-//	motor2.forward();
-//}
-//
-//public void left() {
-//	motor1.setSpeed(350); // PIENEMPI
-//	motor1.forward();
-//	motor2.setSpeed(200); // ISOMPI
-//	motor2.forward();
-//}
-//
-//public void forward() {
-//	motor1.setSpeed(350);
-//	motor1.forward();
-//	motor2.setSpeed(350);
-//	motor2.forward();
-//}
-
 }

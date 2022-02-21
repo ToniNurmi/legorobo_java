@@ -18,14 +18,14 @@ public class RunClass {
 		Button.waitForAnyPress();
 		Button.LEDPattern(0);
 		LCD.clear();
-
+		
 		de = new DataExchange();
 		us = new Ultra(de);
 		lf = new LineFollower(de);
 
-		new Thread(de).start();
 		new Thread(us).start();
 		new Thread(lf).start();
+		new Thread(de).start();
 
 	}
 

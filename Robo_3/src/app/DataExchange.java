@@ -6,7 +6,6 @@ public class DataExchange extends Thread { //t‰‰ kaikki on vaa varastettu sielt‰
 	private int CMD = 1;
 	
 	public DataExchange() {
-		
 	}
 	
 	public boolean getObstacle() {
@@ -24,10 +23,9 @@ public class DataExchange extends Thread { //t‰‰ kaikki on vaa varastettu sielt‰
 	public void setCMD(int command) {
 		CMD = command;
 	}
-
-	@Override
+	
 	public void run() {
-		
+
 	}
 
 }
