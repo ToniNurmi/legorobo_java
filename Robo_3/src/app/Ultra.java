@@ -46,7 +46,7 @@ public class Ultra extends Thread {
 						sp.fetchSample(sample, 0);
 						distance = (int) (sample[0] * 100); // etit‰‰n uus distance, ettei vanha j‰‰ kummittelemaan
 						data.setObstacle(true);
-						//data.setCMD(1);
+						data.setCMD(1);
 						Delay.msDelay(3000);
 						kierros++;
 					} else {
