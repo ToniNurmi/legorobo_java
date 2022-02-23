@@ -33,12 +33,29 @@ public class Move extends Thread {
 		motor2.setSpeed(b);
 		motor2.forward();
 	}
+	
+	public void moveBck() {
+		motor1.setSpeed(200);
+		motor2.setSpeed(200);
+		motor1.backward();
+		motor2.backward();
+	}
 
 	public void avoidObstacle() {
-		pilot.rotate(-120); // k‰‰nny oikealle (en tie mihin luku perustuu, ei ainakaan asteisiin)
-		pilot.setLinearSpeed(165);
+		int rotate = -120;
+		pilot.rotate(rotate); // k‰‰nny oikealle (en tie mihin luku perustuu, ei ainakaan asteisiin)
+		pilot.setLinearSpeed(250);
 		data.setObstacle(true);
 		pilot.arc(360, 90); // radius, angle (matka eteenp‰in, kuinka pitk‰‰n menee kaarta)
-		pilot.rotate(110);
+		pilot.rotate(0 - rotate - 50); // monimutkasta
+	}
+	
+	public void rotate() {
+		pilot.rotate(900);
+	}
+	
+	public void stopMove() {
+		motor1.stop();
+		motor2.stop();
 	}
 }

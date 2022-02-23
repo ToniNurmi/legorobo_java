@@ -4,6 +4,7 @@ public class DataExchange extends Thread { //t‰‰ kaikki on vaa varastettu sielt‰
 	
 	private boolean obstacle = false;
 	private int CMD = 1;
+	private int speed = 350;
 	
 	public DataExchange() {
 	}
@@ -22,6 +23,14 @@ public class DataExchange extends Thread { //t‰‰ kaikki on vaa varastettu sielt‰
 
 	public void setCMD(int command) {
 		CMD = command;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 	
 	public void run() {
