@@ -25,14 +25,15 @@ public class RunClass {
 		
 		lcd = new Screen(de);
 		new Thread(lcd).start();
+		lcd.smile();
 		
 		song = new Song(de);
 		us = new Ultra(de);
 		lf = new LineFollower(de);
 		
+		new Thread(lf).start();
 		new Thread(us).start();
 		new Thread(song).start();
-		new Thread(lf).start();
 		new Thread(de).start();
 
 	}

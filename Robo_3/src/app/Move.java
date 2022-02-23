@@ -42,16 +42,16 @@ public class Move extends Thread {
 	}
 
 	public void avoidObstacle() {
-		int rotate = -120;
+		int rotate = -100;
 		pilot.rotate(rotate); // k‰‰nny oikealle (en tie mihin luku perustuu, ei ainakaan asteisiin)
 		pilot.setLinearSpeed(250);
 		data.setObstacle(true);
 		pilot.arc(360, 90); // radius, angle (matka eteenp‰in, kuinka pitk‰‰n menee kaarta)
-		pilot.rotate(0 - rotate - 50); // monimutkasta
+		pilot.rotate(0 - rotate / 1.5); // monimutkasta
 	}
 	
 	public void rotate() {
-		pilot.rotate(900);
+		pilot.rotate(500);
 	}
 	
 	public void stopMove() {

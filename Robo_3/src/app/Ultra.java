@@ -37,7 +37,7 @@ public class Ultra extends Thread {
 
 				if (distance > detect) { // jos edessä ei oo mitään
 
-					// System.out.println("Distance: " + distance + "cm"); // näyttää näytöllä
+					//System.out.println("Distance: " + distance + "cm"); // näyttää näytöllä
 					// etäisyyden sentteinä
 					// Delay.msDelay(100);
 

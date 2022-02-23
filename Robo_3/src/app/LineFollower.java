@@ -11,12 +11,14 @@ public class LineFollower extends Thread {
 	DataExchange data;
 	private static Move move;
 	private static EV3ColorSensor cs;
+	private static Screen lcd;
 
 	public LineFollower(DataExchange de) {
 
 		data = de;
 		cs = new EV3ColorSensor(SensorPort.S1);
 		move = new Move(de);
+		lcd = new Screen(de);
 
 	}
 
@@ -25,15 +27,17 @@ public class LineFollower extends Thread {
 		int round = 0;
 		while (true) {
 			if (data.getCMD() == 1) {
-
+				lcd.smile();
 				final SampleProvider sp = cs.getRedMode(); // sama ku ultrasonic sensorissa
 				float[] sample = new float[sp.sampleSize()];
 				sp.fetchSample(sample, 0);
 				float color = (sample[0]);
 
-				if (data.getSpeed() > 200) { // normi nopeus (ei mit‰‰n edess‰)
+				if (data.getSpeed() > 250) { // normi nopeus (ei mit‰‰n edess‰)
 					
-//					System.out.println(color); // testi printtaus
+					//System.out.println(data.getSpeed() + " - " + color); // testi printtaus
+					
+					lcd.smile();
 					
 					if (color > 0.09) { // jos on liian valoisaa, k‰‰nyt‰‰n vasemmalle
 						move.moveFwd(data.getSpeed(), data.getSpeed() - (color * 1000));
@@ -46,13 +50,17 @@ public class LineFollower extends Thread {
 					if (data.getObstacle() == true) { // kun 15cm et‰isyydell‰ on jotain
 						if (round == 0) { // kun este n‰hd‰‰n ekan kerran
 							
+							
+							
 							sample = new float[sp.sampleSize()];
 							sp.fetchSample(sample, 0);
 							color = (sample[0]);
 							
 							move.stopMove(); // hetkellinen pys‰ytys jotta voi mietti‰ el‰m‰ns‰ valintoja
+							lcd.yes();
 							Delay.msDelay(150);
 							move.avoidObstacle(); // aloitetaan kierto-protokolla
+							
 							boolean searchBlack = true;
 							boolean rotate = true;
 							while (searchBlack == true) {
@@ -65,7 +73,8 @@ public class LineFollower extends Thread {
 									rotate = false;
 									move.moveFwd(0, 175); // k‰‰nnyt‰‰n jatkamaan viivaa pitkin
 								} else if (color > 0.09 && rotate == true) {
-									move.moveFwd(175, 225); // etsit‰‰n musta viiva hitaasti, mutta varmasti hieman kaartaen
+									lcd.smile();
+									move.moveFwd(210, 225); // etsit‰‰n musta viiva hitaasti, mutta varmasti hieman kaartaen
 								} else if (color > 0.07 && rotate == false) {
 									move.stopMove();
 									Delay.msDelay(100);
@@ -76,6 +85,7 @@ public class LineFollower extends Thread {
 							data.setObstacle(false); // palataan normiin
 							round++;
 						} else { // tokan kierroksen este
+							lcd.yes();
 							move.stopMove();
 							Delay.msDelay(500);
 							move.moveBck();
@@ -87,7 +97,8 @@ public class LineFollower extends Thread {
 							break;
 						}
 
-					} else { // kun nopeus on 200 (este 25 cm et‰isyydell‰)
+					} else { // kun nopeus on 250 (este 25 cm et‰isyydell‰)
+						lcd.scare();
 						if (color > 0.09) { // jos on liian valoisaa, k‰‰nyt‰‰n vasemmalle
 							move.moveFwd(data.getSpeed(), data.getSpeed() - (color * 1000));
 						} else if (color < 0.07) { // jos on liian pime‰‰, k‰‰nyt‰‰n oikealle
