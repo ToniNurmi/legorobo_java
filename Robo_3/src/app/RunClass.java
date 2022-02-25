@@ -14,8 +14,6 @@ public class RunClass {
 	
 	public static void main(String[] args) {
 
-
-		
 		de = new DataExchange();
 		
 		lcd = new Screen(de);

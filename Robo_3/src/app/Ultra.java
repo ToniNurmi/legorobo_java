@@ -29,6 +29,7 @@ public class Ultra extends Thread {
 
 		while (true) {
 			if (data.getCMD() == 1) {
+				
 				us.enable();
 				
 				float[] sample = new float[sp.sampleSize()];
@@ -36,10 +37,12 @@ public class Ultra extends Thread {
 				int distance = (int) (sample[0] * 100);
 
 				if (distance > detect) { // jos edess‰ ei oo mit‰‰n
-
+					
 					//System.out.println("Distance: " + distance + "cm"); // n‰ytt‰‰ n‰ytˆll‰
 					// et‰isyyden senttein‰
 					// Delay.msDelay(100);
+					
+					System.out.println(""); // ilman t‰t‰ ultra pist‰‰ ittens‰ pois p‰‰lt‰, koska ?????????????????
 
 					if (Button.getButtons() != 0) { // jos painaa nappia
 						us.close();
@@ -54,7 +57,7 @@ public class Ultra extends Thread {
 						}
 					}
 				} else { // jos havaitaan jotain
-					us.disable();
+					//us.disable();
 //						System.out.println("Kierros:" + kierros);
 					if (kierros < 1) { // eka kierros
 
