@@ -4,7 +4,7 @@ public class DataExchange extends Thread { //t‰‰ kaikki on vaa varastettu sielt‰
 	
 	private boolean obstacle = false;
 	private int CMD = 1;
-	private int speed = 350;
+	private int speed = 300;
 	
 	public DataExchange() {
 	}

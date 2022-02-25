@@ -45,7 +45,7 @@ public class Move extends Thread {
 		int rotate = -100;
 		pilot.rotate(rotate); // käänny oikealle (en tie mihin luku perustuu, ei ainakaan asteisiin)
 		pilot.setLinearSpeed(250);
-		data.setObstacle(true);
+		data.setObstacle(true); // varmuudeks tämmöne ku joskus se näytti falsee tässä jostain syystä
 		pilot.arc(360, 90); // radius, angle (matka eteenpäin, kuinka pitkään menee kaarta)
 		pilot.rotate(0 - rotate / 1.5); // monimutkasta
 	}

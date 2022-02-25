@@ -42,7 +42,7 @@ public class LineFollower extends Thread {
 					if (color > 0.09) { // jos on liian valoisaa, k‰‰nyt‰‰n vasemmalle
 						move.moveFwd(data.getSpeed(), data.getSpeed() - (color * 1000));
 					} else if (color < 0.07) { // jos on liian pime‰‰, k‰‰nyt‰‰n oikealle
-						move.moveFwd(190 + (color * 1000), data.getSpeed());
+						move.moveFwd(100 + (color * 1000), data.getSpeed());
 					} else { // t‰ysill‰ eti‰p‰i
 						move.moveFwd(data.getSpeed(), data.getSpeed());
 					}
@@ -78,7 +78,7 @@ public class LineFollower extends Thread {
 								} else if (color > 0.07 && rotate == false) {
 									move.stopMove();
 									Delay.msDelay(100);
-									break; // siirryt‰‰n seuraavaan osioon eli riville 72
+									break; // siirryt‰‰n seuraavaan osioon eli riville 84
 								}
 							}
 							searchBlack = false; // ei etit‰ en‰‰ mustaa viivaa "suoralla" linjalla
@@ -106,21 +106,16 @@ public class LineFollower extends Thread {
 						} else { // t‰ysill‰ eti‰p‰i
 							move.moveFwd(data.getSpeed(), data.getSpeed());
 						}
-
 					}
 
 					if (Button.getButtons() != 0) { // jos painaa nappia
 						cs.close();
 						break;
 					}
-
 				}
 			} else {
 				data.setCMD(0);
-
 			}
 		}
-
 	}
-
 }
