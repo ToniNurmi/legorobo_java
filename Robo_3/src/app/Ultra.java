@@ -46,7 +46,7 @@ public class Ultra extends Thread {
 						break;
 					}
 					if (distance < detect_pre) { // jos havaitaan jotain kaukana
-						data.setSpeed(250); // SÄÄDETÄÄN NOPEUTTA
+						data.setSpeed(240); // SÄÄDETÄÄN NOPEUTTA
 
 						if (Button.getButtons() != 0) { // jos painaa nappia
 							us.close();
@@ -66,7 +66,7 @@ public class Ultra extends Thread {
 						song.obstacle();
 						data.setCMD(1);
 						Delay.msDelay(3000); // Ettei se nää uutta estettä välittömästi
-						data.setSpeed(300); // SÄÄDETÄÄN NOPEUTTA
+						data.setSpeed(275); // SÄÄDETÄÄN NOPEUTTA
 						kierros++;
 					} else { // toka kierros
 						data.setObstacle(true); // ilmoitetaan linefollowerille

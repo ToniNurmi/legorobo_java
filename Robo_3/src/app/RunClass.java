@@ -14,6 +14,16 @@ public class RunClass {
 	
 	public static void main(String[] args) {
 
+
+		
+		de = new DataExchange();
+		
+		lcd = new Screen(de);
+		
+		song = new Song(de);
+		us = new Ultra(de);
+		lf = new LineFollower(de);
+		
 		Button.LEDPattern(7);
 		LCD.drawString("Press anything", GraphicsLCD.VCENTER, 3);
 		LCD.drawString(" to continue!",  GraphicsLCD.VCENTER, 4);
@@ -21,15 +31,8 @@ public class RunClass {
 		Button.LEDPattern(0);
 		LCD.clear();
 		
-		de = new DataExchange();
-		
-		lcd = new Screen(de);
 		new Thread(lcd).start();
 		lcd.smile();
-		
-		song = new Song(de);
-		us = new Ultra(de);
-		lf = new LineFollower(de);
 		
 		new Thread(lf).start();
 		new Thread(us).start();

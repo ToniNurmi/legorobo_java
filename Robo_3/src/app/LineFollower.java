@@ -33,7 +33,7 @@ public class LineFollower extends Thread {
 				sp.fetchSample(sample, 0);
 				float color = (sample[0]);
 
-				if (data.getSpeed() > 250) { // normi nopeus (ei mit‰‰n edess‰)
+				if (data.getSpeed() > 240) { // normi nopeus (ei mit‰‰n edess‰)
 					
 					//System.out.println(data.getSpeed() + " - " + color); // testi printtaus
 					
@@ -97,7 +97,7 @@ public class LineFollower extends Thread {
 							break;
 						}
 
-					} else { // kun nopeus on 250 (este 25 cm et‰isyydell‰)
+					} else { // kun nopeus on 240 (este 25 cm et‰isyydell‰)
 						lcd.scare();
 						if (color > 0.09) { // jos on liian valoisaa, k‰‰nyt‰‰n vasemmalle
 							move.moveFwd(data.getSpeed(), data.getSpeed() - (color * 1000));
